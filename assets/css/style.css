@@ -1,0 +1,340 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+.glow {
+  
+  color: rgb(252, 254, 196);
+  font-weight: 700;
+  text-align: center;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    font-size:100%;
+    text-shadow: 0 0 20px rgb(103, 3, 244), 0 0 30px #c3450b, 0 0 40px #dd4c12, 0 0 50px #e60073;
+  }
+  
+  to {
+    font-size:99%;
+    text-shadow: 0 0 20px #fff, 0 0 30px #26484f;
+  }
+}
+
+.glow-menu {
+  
+  color: rgb(252, 254, 196);
+  font-weight: 700;
+  text-align: center;
+  animation: glow_menu 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow_menu {
+  from {
+    text-shadow: 0 0 20px rgb(103, 3, 244), 0 0 30px #f8e028, 0 0 40px #f5ae0a, 0 0 50px #cc0606;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #313131;
+  }
+}
+
+#page-banner{
+  border: solid rgb(255, 98, 0);
+  border-width: 10px;
+  
+  border-radius: 25px;
+  margin-top: 150px;
+  margin-left: 80px;
+  width: 600px;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-color: rgba(3, 66, 95, 0.751);
+}
+.ban{
+  margin-top: 160px;
+  color: white;
+  font-size: x-large;
+}
+#page-banner1{
+  border: solid rgb(255, 98, 0);
+  border-width: 10px;
+  
+  border-radius: 25px;
+  margin-top: 150px;
+  margin-left: 700px;
+  width: 600px;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-color: rgba(3, 66, 95, 0.751);
+}
+#page-banner2{
+  border: solid rgb(255, 98, 0);
+  border-width: 10px;
+  
+  border-radius: 25px;
+  margin-top: 150px;
+  margin-left: 700px;
+  width: 600px;
+  height: 400px;
+  background-repeat: no-repeat;
+  background-color: rgba(3, 66, 95, 0.751);
+}
+#register_icon{
+  
+  background-image: url(https://wallpapersmug.com/large/d4d3ea/red-abstract-pride-cross-art.jpg);
+  background-color: rgba(240, 204, 204, 0.9);
+  margin-top: 15px;
+  border-top-left-radius:80px;
+  margin-bottom: 15px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color:rgb(255, 255, 255);
+  font-weight:10px;
+  font-size: x-large;
+}
+#transfer{
+  background-image: url(https://wallpapersmug.com/large/d4d3ea/red-abstract-pride-cross-art.jpg);
+  background-color: rgba(240, 204, 204, 0.9);
+ 
+  margin-top: 15px;
+  border-bottom-right-radius: 0px;
+  margin-bottom: 15px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color:rgb(255, 255, 255);
+  font-weight:10px;
+  font-size: x-large;
+}
+#vin_search{
+  background-image: url(https://wallpapersmug.com/large/d4d3ea/red-abstract-pride-cross-art.jpg);
+  margin-top: 15px;
+  background-color: rgba(240, 204, 204, 0.9);
+  border-bottom-left-radius: 0px;
+  margin-bottom: 15px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  background-size:cover;
+  background-repeat: no-repeat;
+  color:rgb(255, 255, 255);
+  font-weight:10px;
+  font-size: x-large;
+}
+#Search{
+  
+  background-image: url(https://wallpapersmug.com/large/d4d3ea/red-abstract-pride-cross-art.jpg);
+  margin-top: 15px;
+  background-color: rgba(240, 204, 204, 0.9);
+  border-top-right-radius: 80px;
+  margin-bottom: 15px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color:rgb(255, 255, 255);
+  font-weight:10px;
+  font-size: x-large;
+  
+}
+#record{
+  background-image: url(https://wallpapersmug.com/large/d4d3ea/red-abstract-pride-cross-art.jpg);
+  margin-top: 15px;
+  background-color: rgba(240, 204, 204, 0.9);
+  border-bottom-left-radius: 80px;
+  margin-bottom: 15px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color:rgb(255, 255, 255);
+  font-weight:10px;
+  font-size: x-large;
+
+}
+#about{
+  background-image: url(https://wallpapersmug.com/large/d4d3ea/red-abstract-pride-cross-art.jpg);
+  margin-top: 15px;
+  background-color: rgba(240, 204, 204, 0.9);
+  border-bottom-right-radius: 80px;
+  margin-bottom: 15px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color:rgb(255, 255, 255);
+  font-weight:10px;
+  font-size: x-large;
+}
+
+.team{
+  background-image: url(https://i.pinimg.com/originals/21/8f/c4/218fc4f0be3a8531aa19fde1118a48bb.jpg);
+  background-blend-mode: darken;
+  margin-top: 15px;
+  height: 300px;
+  background-color: rgba(240, 204, 204, 0.9);
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  margin-bottom: 15px;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  background-size: cover;
+  border-color: #fff;
+  border-width: 5px;
+  border: 10px;
+  background-repeat: no-repeat;
+  color:rgb(255, 255, 255);
+  font-weight:10px;
+  font-size: x-large;
+}
+.Jumbo{
+  border: 5px;
+  border-color: #fff;
+}
+
+.Jumbotron{
+  
+  background-image: url(../../yena-kwon-63tI5gyLHRc-unsplash.jpg);
+  height: 220px;
+  background-color: rgba(240, 204, 204, 0.9);
+  background-blend-mode:darken;
+  
+ border-bottom: 30px;
+ border-color: rgb(253, 241, 0);
+ border-style:double;
+  background-size: cover;
+
+  background-repeat: no-repeat;
+  color:rgb(255, 255, 255);
+  font-weight:25px;
+  font-size:xx-large;
+}
+.devs
+{
+ max-width: 100px;
+}
+#jumbo{
+ 
+}
+body{
+  min-height: 100vh;
+ background-image: url(../../Untitled-2.jpg);
+  background-color:rgb(198, 78, 35);
+  background-size: cover;
+  background-position: center;
+}
+
+.side-bar{
+  background: rgba(201, 78, 29, 0.705);
+  backdrop-filter: blur(15px);
+  width: 290px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  overflow-y: auto;
+  transition: 0.6s ease;
+  transition-property: left;
+}
+
+.side-bar{
+  display: block;
+  left: 0;
+}
+
+.side-bar .menu{
+  width: 100%;
+  margin-top: 80px;
+}
+
+.side-bar .menu .item{
+  position: relative;
+  cursor: pointer;
+}
+
+.side-bar .menu .item a{
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+  display: block;
+  padding: 5px 30px;
+  line-height: 60px;
+}
+
+.side-bar .menu .item a:hover{
+  background: #ff9d00;
+  transition: 0.3s ease;
+}
+
+.side-bar .menu .item i{
+  margin-right: 15px;
+}
+
+.side-bar .menu .item a .dropdown{
+  position: absolute;
+  right: 0;
+  margin: 20px;
+  transition: 0.3s ease;
+}
+
+.side-bar .menu .item .sub-menu{
+  background: rgba(255, 255, 255, 0.1);
+  display: none;
+}
+
+.side-bar .menu .item .sub-menu a{
+  padding-left: 80px;
+}
+
+.rotate{
+  transform: rotate(90deg);
+}
+
+.close-btn{
+  position: absolute;
+  color: #fff;
+  font-size: 20px;
+  right: 0;
+  margin: 25px;
+  cursor: pointer;
+}
+
+
+.menu-btn{
+  position: absolute;
+  color: #fff;
+  font-size: 20px;
+  margin: 25px;
+  cursor: pointer;
+}
+
+.main{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 20px;
+}
+
+.main h1{
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 60px;
+  text-align: center;
+  line-height: 80px;
+}
+
+@media (max-width: 900px){
+  .main h1{
+    font-size: 40px;
+    line-height: 60px;
+  }
+}

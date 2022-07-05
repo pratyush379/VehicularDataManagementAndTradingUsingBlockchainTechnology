@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Vehicular Data Management & Trading</title>
+	<link rel="stylesheet" href="./css/datasheetstyle.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="../css/khatiyan.css">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script type="text/javascript" src="../app.js"></script>
+</head>
+
+<body>
+
+	<div class="menu-btn">
+		<i class="fas fa-bars"></i>
+	</div>
+	<div class="side-bar">
+		<div class="close-btn">
+			<i class="fas fa-times"></i>
+		</div>
+		<div class="menu">
+			<div class="item"><a href="dashboard.html"><i class="fas fa-desktop"></i>Dashboard</a></div>
+			<div class="item">
+				<a class="sub-btn" href="register.html"><i class="fas fa-table"></i>Register<i
+						class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="#" class="sub-item">Users</a>
+					<a href="#" class="sub-item">Mechanic</a>
+					<a href="#" class="sub-item">vehicle</a>
+					<a href="#" class="sub-item">report</a>
+
+				</div>
+			</div>
+			<div class="item">
+				<a class="sub-btn" href="search.html"><i class="fas fa-table"></i>Search<i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+				  <a href="#" class="sub-item">Users</a>
+				  <a href="#" class="sub-item">Assets</a>
+				  
+				</div>
+			  </div>
+			<div class="item"><a href="Mutation.html"><i class="fa fa-clipboard"></i>Transfer ownership</a></div>
+			<!--<div class="item"><a href="datasheet.html"><i class="fa fa-database"></i>user right</a></div>-->
+			<div class="item">
+			<a class="sub-btn" href="userRights.html"><i class="fas fa-table"></i>user right<i
+				class="fas fa-angle-right dropdown"></i></a>
+			<div class="sub-menu">
+			  <a href="#" class="sub-item">view permission</a>
+			  <a href="#" class="sub-item">grant permission</a>
+			  <a href="#" class="sub-item">revoke permission</a>
+	
+			</div>
+		  </div>
+			<div class="item"><a href="Maintenace.html"><i class="fa fa-database"></i>Maintenance</a></div>
+			<div class="item">
+				<a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="developers.html" class="sub-item">Know our Developers</a>
+					<a href="about.html" class="sub-item">About the Project</a>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<section class="main" style="margin-left: 150px;">
+		<div id="register" style="display: block;">
+		 
+			<center><p id="demo"> Update Maintenace Report</p></center>
+			<form class="cm-login-form" onsubmit="return false" >
+			  <fieldset>
+			   <center><legend>User Register</legend></center>
+			   <input type="text" id="vin" class="cm-text-input" placeholder="VIN">
+			   <!-- <input type="text" id="vc" class="cm-text-input" placeholder="Vehicle condition"> -->
+			   <select id="vc" class="cm-text-input" style="color:white;" >
+				<option value="vc" disabled selected>select vehicel condition</option>
+				<option value="Excellent">Excellent</option>
+				<option value="Good">Good</option>
+				<option value="Average">Average</option>
+				<option value="Bad">Bad</option>
+			  </select>
+			   <input type="text" id="or" class="cm-text-input" placeholder="odometer reading">
+			   <input type="text" id="eh" class="cm-text-input" placeholder="engine hours"  >
+			   <input type="text" id="lsd" class="cm-text-input" placeholder="last service date" onfocus="(this.type='date')">
+			   <input type="text" id="st" class="cm-text-input" placeholder="servicing type">
+			   <input type="text" id="rp" class="cm-text-input" placeholder="replaced part(if any)">
+			   <input type="text" id="cost" class="cm-text-input" placeholder="cost">
+			   <!-- <input type="text" id="ui" class="cm-text-input" placeholder="under insurance?"> -->
+			   <select id="ui" class="cm-text-input" style="color:white;" >
+				<option value="" disabled selected>is vehicle under insurance?</option>
+				<option value="yes">Yes</option>
+				<option value="no">No</option>
+			  </select>
+			   <input type="text" id="mes" class="cm-text-input" placeholder="message">
+			   </fieldset>
+			   <button type="submit" class="cm-submit2 " onclick="add_report()"> Add Report </button>
+			</form>
+		 
+		</div>
+		</section>
+
+	<script type="text/javascript">
+		var storage;
+		$(document).ready(async function () {
+			storage = await init();
+			//jquery for toggle sub menus
+			$('.sub-btn').click(function () {
+				$(this).next('.sub-menu').slideToggle();
+				$(this).find('.dropdown').toggleClass('rotate');
+			});
+
+			//jquery for expand and collapse the sidebar
+			$('.menu-btn').click(function () {
+				$('.side-bar').addClass('active');
+				$('.menu-btn').css("visibility", "hidden");
+			});
+
+			$('.close-btn').click(function () {
+				$('.side-bar').removeClass('active');
+				$('.menu-btn').css("visibility", "visible");
+			});
+		});
+
+		function add_report() {
+      var form_vin=document.getElementById("vin").value;
+      var form_vc=document.getElementById("vc").value;
+      var form_or=document.getElementById("or").value;
+	  
+      var form_eh =document.getElementById("eh").value;
+	 
+      var form_lsd1 =document.getElementById("lsd").value;
+	  var form_lsd = form_lsd1.toString();
+	  var form_st =document.getElementById("st").value;
+      var form_rp =document.getElementById("rp").value;
+	  var form_cost =document.getElementById("cost").value;
+	  var form_ui =document.getElementById("ui").value;
+	  var form_mes =document.getElementById("mes").value;
+      web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				//deposit is method in smart contract
+				return contract.methods.updateMaintenanceReport(form_vin, form_vc,form_or,form_eh,form_lsd,form_st,form_rp,form_cost,form_ui,form_mes).send({from: acc,
+        	gas: 4700000,
+	 	gasPrice: '2000000000'});//send from which acc
+
+			}).then((response) => {
+           console.log(response)
+           console.log("if access is granted to you then report updated successully")
+		   alert("if access is granted to you then report updated successully")
+     }).catch(function(err)
+			{
+				// console.log("error:can't add vehicle");
+        console.log(err);
+        alert("error : report not added");
+			})
+	}
+ 
+	</script>
+</body>
+
+</html>

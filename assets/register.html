@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicular Data Management & Trading</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../css/login-form.css">
+    <link rel="stylesheet" href="../css/demo.css">
+  </head>
+  <body>
+
+    <div class="menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="side-bar">
+      <div class="close-btn">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="menu">
+        <div class="item"><a href="dashboard.html"><i class="fas fa-desktop"></i>Dashboard</a></div>
+        <div class="item">
+          <a class="sub-btn"><i class="fas fa-table"></i>Register<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <a href="#" class="sub-item" onclick="register_fun4()"> Owner</a>
+            <a href="#" class="sub-item" onclick="register_fun()"> Users</a>
+            <a href="#" class="sub-item" onclick="register_fun2()"> Mechanic</a>
+            <a href="#" class="sub-item" onclick="register_fun3()">vehicle</a>
+            
+          </div>
+        </div>
+        <div class="item">
+          <a class="sub-btn" href="search.html"><i class="fas fa-table"></i>Search<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <a href="#" class="sub-item">Users</a>
+            <a href="#" class="sub-item">Mechanic</a>
+            <a href="#" class="sub-item">vehicle</a>
+            <a href="#" class="sub-item">report</a>
+            
+          </div>
+        </div>
+          <!--<a href="search.html" ><i class="fas fa-th"></i>Search</a></div>-->
+		<div class="item"><a href="Mutation.html"><i class="fa fa-clipboard"></i>Transfer ownership</a></div>
+    <div class="item">
+			<a class="sub-btn" href="userRights.html"><i class="fas fa-table"></i>user right<i
+				class="fas fa-angle-right dropdown"></i></a>
+			<div class="sub-menu">
+			  <a href="#" class="sub-item">view permission</a>
+			  <a href="#" class="sub-item">grant permission</a>
+			  <a href="#" class="sub-item">revoke permission</a>
+	
+			</div>
+		  </div>
+		<div class="item"><a href="Maintenace.html"><i class="fa fa-database"></i>Maintenance</a></div>
+        <div class="item">
+          <a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <a href="developers.html" class="sub-item">Know our Developers</a>
+            <a href="about.html" class="sub-item">About the Project</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <section class="main" style="margin-left: 150px;">
+
+      <div id="register_account" style="display: none;">
+        
+          <center><p id="demo"> Welcome To owner  Portal</p></center>
+          <form class="cm-login-form" onsubmit="return false" >
+            <fieldset>
+             <center><legend>Account Register</legend></center>
+             <input type="text" id="account_add" class="cm-text-input" placeholder="Enter Account No to add">
+             
+             </fieldset>
+             <button type="submit" class="cm-submit2" onclick="registerAccount()"> Add as User </button>
+             <button type="submit" class="cm-submit2" onclick="registerAccountM()"> Add as Mechanic </button>
+          </form>
+       
+      </div>
+      <div id="page-banner">
+        <center>        
+          
+          <div class="ban">
+            <center>
+            <h2 class="glow-menu"> Welcome To Register Portal</h2>
+            <h3 style="font-size:large;" >Select The Entity To Register</h3>
+          </center>
+          </div>
+        </center>
+ 
+      </div>
+
+      <div id="register" style="display: none;">
+        
+          <center><p id="demo"> Welcome To User Enrollment Portal</p></center>
+          <form class="cm-login-form" onsubmit="return false" >
+            <fieldset>
+             <center><legend>User Register</legend></center>
+             <input type="text" id="account_no" class="cm-text-input" placeholder="Account No">
+             <input type="text" id="name" class="cm-text-input" placeholder="Name">
+             <!-- <input type="text" id="Gender" class="cm-text-input" placeholder="Gender"> -->
+             <select id="Gender" class="cm-text-input" style="color:white;" >
+              <option value="" disabled selected>Select your gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+             <input type="text" id="Address" class="cm-text-input" placeholder="Address">
+             <input type="text" id="phone" class="cm-text-input" placeholder="Contact no">
+             <input type="password" id="password" class="cm-text-input" placeholder="password">
+             </fieldset>
+             <button type="submit" class="cm-submit2" onclick="register_user()"> Create Profile </button>
+          </form>
+       
+      </div>
+      <div id="register2" style="display: none;">
+        
+          <center><p id="demo"> Welcome To Mechanic Enrollment Portal</p></center>
+          <form class="cm-login-form" onsubmit="return false" >
+            <fieldset>
+             <center><legend>Mechanic Register</legend></center>
+             <input type="text" id="account_no1" class="cm-text-input" placeholder="Account No">
+             <input type="text" id="name1" class="cm-text-input" placeholder="Name" >
+           <!-- <input type="" id="Gender1" class="cm-text-input" placeholder="Gender"> -->
+           <!-- <label for="lang" style="color: white;">Gender : style="max-width: 550px;</label> -->
+             <select id="Gender1" class="cm-text-input" style="color:white;" >
+               <option value="" disabled selected>Select your gender</option>
+               <option value="Male">Male</option>
+               <option value="Female">Female</option>
+               <option value="Other">Other</option>
+             </select>
+             
+             <input type="tel" id="phone1" class="cm-text-input" placeholder="Contact no">
+             <input type="text" id="password1" class="cm-text-input" placeholder="Garage name">
+             <input type="text" id="Address1" class="cm-text-input" placeholder="Address">
+             </fieldset>
+             <button type="submit" class="cm-submit2" onclick="register_mech()"> Create Profile </button>
+          </form>
+      
+      </div>
+
+      <div id="register_asset" style="display: none;">
+        
+          <center><p id="demo"> Welcome To vehicle Enrollment Portal</p></center>
+          <form class="cm-login-form" onsubmit="return false" >
+            <fieldset>
+             <center><legend>Vehicle Register</legend></center>
+             <input type="text" id="account_no_owner" class="cm-text-input" placeholder="Account No">
+             <input type="text" id="vin" class="cm-text-input" placeholder="vin">
+             <input type="text" id="purchase_date" class="cm-text-input" placeholder="purchase date" onfocus="(this.type='date')">
+             <input type="text" id="brand_name" class="cm-text-input" placeholder="brand name">
+             <input type="text" id="model_name" class="cm-text-input" placeholder="model name">
+             <input type="text" id="owner_name1" class="cm-text-input" placeholder="owner name">
+             <!-- <input type="text" id="isFirstHandOwner" class="cm-text-input" placeholder="isFirstHandOwner?"> -->
+             <select id="isFirstHandOwner" class="cm-text-input" style="color:white;" >
+              <option value="" disabled selected>are you first hand owner?</option>
+              <option value="True">true</option>
+              <option value="False">false</option>
+              
+            </select>
+           </fieldset>
+             <button type="submit" class="cm-submit2" onclick="register_car()"> Register Vehicle</button>
+          </form>
+       
+      </div>
+    </section>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script type="text/javascript" src="../app.js"></script>
+    <script type="text/javascript">
+   var storage;
+    $(document).ready(async function(){
+      //jquery for toggle sub menus
+     storage = await init();
+    
+      $('.sub-btn').click(function(){
+        $(this).next('.sub-menu').slideToggle();
+        $(this).find('.dropdown').toggleClass('rotate');
+      });
+
+      //jquery for expand and collapse the sidebar
+      $('.menu-btn').click(function(){
+        $('.side-bar').addClass('active');
+        $('.menu-btn').css("visibility", "hidden");
+      });
+
+      $('.close-btn').click(function(){
+        $('.side-bar').removeClass('active');
+        $('.menu-btn').css("visibility", "visible");
+      });
+    });
+// buttton call ka function likha hua hai
+    function register_fun() {
+      var y=document.getElementById("register_asset");
+      y.style.display = "none";
+      var x = document.getElementById("register2");
+      x.style.display = "none";
+      var z = document.getElementById("register");
+      console.log("register user page");
+      z.style.display = "block";
+      
+      var a = document.getElementById("register_account");
+      a.style.display = "none";
+     
+      var b = document.getElementById("page-banner");
+      b.style.display="none";
+    }
+    function register_fun2() {
+      var y=document.getElementById("register_asset");
+      y.style.display = "none";
+      var x = document.getElementById("register");
+      x.style.display = "none";
+      var z = document.getElementById("register2");
+      console.log("register mechanic page");
+      z.style.display = "block";
+      var a = document.getElementById("register_account");
+      a.style.display = "none";
+      var b = document.getElementById("page-banner");
+      b.style.display="none";
+    }
+    function register_fun3() {
+      var y=document.getElementById("register");
+      y.style.display = "none";
+      var x = document.getElementById("register2");
+      x.style.display = "none";
+      var z = document.getElementById("register_asset");
+      console.log("register vehicle page");
+      z.style.display = "block";
+      var a = document.getElementById("register_account");
+      a.style.display = "none";
+      var b = document.getElementById("page-banner");
+      b.style.display="none";
+    }
+    function register_fun4() {
+      var y=document.getElementById("register");
+      y.style.display = "none";
+      var x = document.getElementById("register2");
+      x.style.display = "none";
+      var z = document.getElementById("register_asset");
+      console.log("register account page");
+      z.style.display = "none";
+      var a = document.getElementById("register_account");
+      a.style.display = "block";
+      var b = document.getElementById("page-banner");
+      b.style.display="none";
+    }
+    
+      
+      function register_user() {
+      var form_account=document.getElementById("account_no").value;
+      var form_name=document.getElementById("name").value;
+      var form_gender=document.getElementById("Gender").value;
+      var form_address=document.getElementById("Address").value;
+      var form_phone=document.getElementById("phone").value;
+      var form_password=document.getElementById("password").value;
+      storage.methods.add_user(form_account, form_name,form_gender,form_address,form_phone,form_password).send({
+		from: form_account,
+	 	gas: 4700000,
+	 	gasPrice: '2000000000'
+		}).then((response) => {
+           console.log(response)
+           console.log("user added successfully")
+           alert("user added successfully")
+     }).catch(function(err)
+			{
+				console.log("error:can't add user");
+        console.log(err);
+        alert("error : user not added");
+			})
+   
+  }
+
+
+   //----------------------------------------------------------------------------------------------------------//
+
+   function register_mech() {
+      var form_account=document.getElementById("account_no1").value;
+      var form_name=document.getElementById("name1").value;
+      var form_gender=document.getElementById("Gender1").value;
+      var form_address=document.getElementById("Address1").value;
+      var form_phone=document.getElementById("phone1").value;
+      var form_password=document.getElementById("password1").value;
+    storage.methods.add_mech(form_account, form_name,form_gender,form_address,form_phone,form_password).send({
+		from: form_account,
+	 	gas: 4700000,
+	 	gasPrice: '2000000000'
+		}).then((response) => {
+           console.log(response)
+           console.log("mechanic added successfully")
+           alert("mechanic added successfully")
+     }).catch(function(err)
+			{
+				console.log("error:can't add mechanic");
+        console.log(err);
+        alert("error : mechanic not added");
+			})
+   }
+
+   function registerAccount() {
+      var form_account=document.getElementById("account_add").value;
+
+      web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				//deposit is method in smart contract
+				return contract.methods.add_accountUser(form_account).send({from:acc,
+	 	gas: 4700000,
+	 	gasPrice: '2000000000'
+		})}).then((response) => {
+           console.log(response)
+           console.log("User account added successfully")
+           alert("User account added successfully")
+     }).catch(function(err)
+			{
+				console.log("error:can't add account");
+        console.log(err);
+        alert("error : account not added");
+			})
+   }
+
+   function registerAccountM() {
+      var form_account=document.getElementById("account_add").value;
+
+      web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				//deposit is method in smart contract
+				return contract.methods.add_accountMech(form_account).send({from:acc,
+	 	gas: 4700000,
+	 	gasPrice: '2000000000'
+		})}).then((response) => {
+           console.log(response)
+           console.log("Mechanic account added successfully")
+           alert("Mechanic account added successfully")
+     }).catch(function(err)
+			{
+				console.log("error:can't add account");
+        console.log(err);
+        alert("error : account not added");
+			})
+   }
+
+    function register_car() {
+       
+      var a =document.getElementById("account_no_owner").value;
+      var b =document.getElementById("vin").value;
+      var c =document.getElementById("brand_name").value;
+      var d =document.getElementById("model_name").value;
+      var e1 =document.getElementById("purchase_date").value;
+      var e = e1.toString();
+      var f =document.getElementById("owner_name1").value;
+      var g =document.getElementById("isFirstHandOwner").value;
+      console.log(a,b,c,d,e,f,g);
+     storage.methods.addCar(a,b,c,d,e,f,g).send({
+		from: a,
+	 	gas: 4700000,
+	 	gasPrice: '2000000000'
+		}).then((response) => {
+           console.log(response)
+           console.log("vehicle added successfully")
+           alert("vehicle registered successfully")
+     }).catch(function(err)
+			{
+				console.log("error:can't add vehicle");
+        console.log(err);
+        alert("error : vehicle not added");
+			})
+
+	 
+   }
+    </script>
+
+  </body>
+</html>

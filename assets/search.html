@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehicular Data Management & Trading</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="../css/login-form.css">
+  <link rel="stylesheet" href="../css/demo.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script type="text/javascript" src="../app.js"></script>
+  <style>
+    .tabledata{
+	padding: 5px;
+	background-color:white;
+	color:black;
+	width: 100%;
+
+}
+
+.head{
+	font-size: 12px;
+	padding: 7px;
+	text-align: center;
+	width: 100px;
+	border-bottom: 2px solid black ;
+	border-right: 2px solid black ;
+	background-color: powderblue;
+}
+
+td{
+	font-size: 20px;
+	padding: 7px;
+	text-align: center;
+	border-bottom: 2px solid black ;
+	border-right: 2px solid black ;
+	font-weight: 700;
+}
+   #searchUser,#searchMech{
+         overflow: "inherit";
+      }
+  </style>
+</head>
+
+<body>
+
+  <div class="menu-btn">
+    <i class="fas fa-bars"></i>
+  </div>
+  <div class="side-bar">
+    <div class="close-btn">
+      <i class="fas fa-times"></i>
+    </div>
+    <div class="menu">
+      <div class="item"><a href="dashboard.html"><i class="fas fa-desktop"></i>Dashboard</a></div>
+      <div class="item">
+        <a class="sub-btn" href="register.html"><i class="fas fa-table"></i>Register<i
+            class="fas fa-angle-right dropdown"></i></a>
+        <div class="sub-menu">
+          <a href="#" class="sub-item">Users</a>
+          <a href="#" class="sub-item">Assets</a>
+
+        </div>
+      </div>
+      <div class="item">
+        <a class="sub-btn"><i class="fas fa-table"></i>Search<i class="fas fa-angle-right dropdown"></i></a>
+        <div class="sub-menu">
+          <a href="#" class="sub-item" onclick="view_user()"> Users</a>
+          <a href="#" class="sub-item" onclick="view_mech()"> Mechanic</a>
+          <a href="#" class="sub-item" onclick="view_car()">vehicle</a>
+          <a href="#" class="sub-item" onclick="view_report()">report</a>
+          
+        </div>
+       </div> <!--a href="search.html"><i class="fas fa-th"></i>Search</a></div>-->
+      <div class="item"><a href="Mutation.html"><i class="fa fa-clipboard"></i>Transfer ownership</a></div>
+      <div class="item">
+        <a class="sub-btn" href="userRights.html"><i class="fas fa-table"></i>user right<i
+          class="fas fa-angle-right dropdown"></i></a>
+        <div class="sub-menu">
+          <a href="#" class="sub-item">view permission</a>
+          <a href="#" class="sub-item">grant permission</a>
+          <a href="#" class="sub-item">revoke permission</a>
+    
+        </div>
+        </div>
+      <div class="item"><a href="Maintenace.html"><i class="fa fa-database"></i>Maintenance</a></div>
+      <div class="item">
+        <a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
+        <div class="sub-menu">
+          <a href="#" class="sub-item">User Profile</a>
+          <a href="#" class="sub-item">Land Data</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+ 
+  <div id="page-banner1">
+    <center>        
+      
+      <div class="ban">
+        <center>
+        <h2 class="glow-menu"> Welcome To Search Portal</h2>
+        <h3 style="font-size:large;" >Select The Option To Continue Your Search</h3>
+      </center>
+      </div>
+    </center>
+
+  </div>
+    <section class="main" style="margin-left: 150px;">
+        <div id="searchUser" style="display: none; margin-left: 102px;">
+            <!-- <section class="cm-login"> -->
+                <center><p id="demo"> Welcome To User Portal</p></center>
+                <form class="cm-login-form" onsubmit="return false" >
+                  <fieldset>
+                   <center><legend>Search User</legend></center>
+                   <input type="text" id="account_user" class="cm-text-input" placeholder="User Account No">
+                   </fieldset>
+                   <button type="submit" class="cm-submit2" onclick="displaydata1()">Search</button>
+                   <button type="submit" class="cm-submit2" onclick="displaydataUser()">display all users</button>
+                </form>
+            <!-- </section> -->
+        </div>
+        <div id="searchMech" style="display: none; margin-left: 102px;">
+            
+                <center><p id="demo"> Welcome To Mechanic Portal</p></center>
+                <form class="cm-login-form" onsubmit="return false" >
+                  <fieldset>
+                   <center><legend>Search Mechanic</legend></center>
+                   <input type="text" id="account_mech" class="cm-text-input" placeholder="Mechanic Account No">
+                   </fieldset>
+                   <button type="submit" class="cm-submit2" onclick="displaydata2()">Search</button>
+                   <button type="submit" class="cm-submit2" onclick="displaydataMech()">display all mechanics</button>
+                </form>
+            
+        </div>
+  
+        <div id="searchCar" style="display: none; margin-left: 102px;">
+            
+                <center><p id="demo"> Welcome To Car Portal</p></center>
+                <form class="cm-login-form" onsubmit="return false" >
+                  <fieldset>
+                   <center><legend>Search Car</legend></center>
+                   <input type="text" id="vin" class="cm-text-input" placeholder="VIN Number">
+                   </fieldset>
+                   <button type="submit" class="cm-submit2" onclick="displaydata3()">Search</button>
+                   <button type="submit" class="cm-submit2" onclick="displaydata5()">Display all cars</button>
+                   <button type="submit" class="cm-submit2" onclick="displaydataAllOwner()">Display car owner by vin</button>
+                </form>
+            
+        </div>
+
+        <div id="searchReport" style="display: none; margin-left: 102px;">
+          
+              <center><p id="demo"> Welcome To Maintenance Portal</p></center>
+              <form class="cm-login-form" onsubmit="return false" >
+                <fieldset>
+                 <center><legend>Search Report</legend></center>
+                 <input type="text" id="vin_report" class="cm-text-input" placeholder="VIN Number">
+                 </fieldset>
+                 <button type="submit" class="cm-submit2" onclick="displaydata4()">Search</button>
+                 <button type="submit" class="cm-submit2" onclick="displaydataAllReport()">Search all report by vin</button>
+              </form>
+          
+      </div>
+
+    <div  id="search_container" style="display: none; padding-left: 140px; color: white;">
+        
+            <div style="font-weight: bold; padding-top: 20px; padding-bottom: 5px; color: darkgreen;">Personal Detail
+            </div> <span></span>
+            <div class="blockchain-container-data">
+              <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">Name</div>
+                <div class="block-chain-75" id="search_name"></div>
+              </div>
+             
+            </div>
+            <div class="blockchain-container-data">
+            <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">Gender</div>
+                <div class="block-chain-75" id="search_gender"></div>
+              </div>
+            </div>
+            <div class="blockchain-container-data">
+              <div class="block-chain-50 display-inline-flex">
+                  <div class="block-chain-25">Gaarage</div>
+                  <div class="block-chain-75" id="search_garage"></div>
+                </div>
+              </div>
+            <div class="blockchain-container-data">
+              <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">Address</div>
+                <div class="block-chain-75" id="search_address"></div>
+              </div>
+              
+            </div>
+            <div class="blockchain-container-data">
+            <div class="block-chain-50 display-inline-flex">
+                <div class="block-chain-25">Phone</div>
+                <div class="block-chain-75" id="search_phone"></div>
+              </div>
+            </div>
+            
+           
+         
+        </div>
+
+        <div  id="search_container2" style="display: none; padding-left: 140px; color: white;">
+           
+                <div style="font-weight: bold; padding-top: 20px; padding-bottom: 5px; color: darkgreen;">Personal Detail
+                </div> <span></span>
+                <div class="blockchain-container-data">
+                  <div class="block-chain-50 display-inline-flex">
+                    <div class="block-chain-25">Name</div>
+                    <div class="block-chain-75" id="search_name1"></div>
+                  </div>
+                 
+                </div>
+                <div class="blockchain-container-data">
+                <div class="block-chain-50 display-inline-flex">
+                    <div class="block-chain-25">Gender</div>
+                    <div class="block-chain-75" id="search_gender1"></div>
+                  </div>
+                </div>
+                <div class="blockchain-container-data">
+                  <div class="block-chain-50 display-inline-flex">
+                    <div class="block-chain-25">Address</div>
+                    <div class="block-chain-75" id="search_address1"></div>
+                  </div>
+                  
+                </div>
+                <div class="blockchain-container-data">
+                <div class="block-chain-50 display-inline-flex">
+                    <div class="block-chain-25">Phone</div>
+                    <div class="block-chain-75" id="search_phone1"></div>
+                  </div>
+                </div>
+                
+                
+             
+            </div>
+
+
+            <div  id="search_container3" style="display: none; padding-left: 140px; color: white;">
+              
+                  <div style="font-weight: bold; padding-top: 20px; padding-bottom: 5px; color: darkgreen;">Personal Detail
+                  </div> <span></span>
+                  <div class="blockchain-container-data">
+                    <div class="block-chain-50 display-inline-flex">
+                        <div class="block-chain-25">owner name</div>
+                        <div class="block-chain-75" id="search_on"></div>
+                      </div>
+                    </div>
+<br>
+
+                  <div class="blockchain-container-data">
+                    <div class="block-chain-50 display-inline-flex">
+                      <div class="block-chain-25">owner address</div>
+                      <div class="block-chain-75" id="search_oac"></div>
+                    </div>
+                   
+                  </div>
+                  <br>
+                  <div class="blockchain-container-data">
+                  <div class="block-chain-50 display-inline-flex">
+                      <div class="block-chain-25">Brand name</div>
+                      <div class="block-chain-75" id="search_bn"></div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="blockchain-container-data">
+                    <div class="block-chain-50 display-inline-flex">
+                      <div class="block-chain-25">Model name</div>
+                      <div class="block-chain-75" id="search_mn"></div>
+                    </div>
+                    
+                  </div>
+                  <br>
+                  <div class="blockchain-container-data">
+                  <div class="block-chain-50 display-inline-flex">
+                      <div class="block-chain-25">Purcahse date</div>
+                      <div class="block-chain-75" id="search_pd"></div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="blockchain-container-data">
+                    <div class="block-chain-50 display-inline-flex">
+                        <div class="block-chain-25">is First hand owner</div>
+                        <div class="block-chain-75" id="search_fho"></div>
+                      </div>
+                    </div>
+                    <br>
+                 
+               
+              </div>
+
+              <div  id="search_container4" style="display: none; padding-left: 140px; color: white;">
+                
+                    <div style="font-weight: bold; padding-top: 20px; padding-bottom: 5px; color: darkgreen;">Personal Detail
+                    </div> <span></span>
+                    <div class="blockchain-container-data">
+                      <div class="block-chain-50 display-inline-flex">
+                          <div class="block-chain-25">vin</div>
+                          <div class="block-chain-75" id="search_vin"></div>
+                        </div>
+                      </div>
+  <br>
+  
+                    <div class="blockchain-container-data">
+                      <div class="block-chain-50 display-inline-flex">
+                        <div class="block-chain-25">vehicle condition</div>
+                        <div class="block-chain-75" id="search_vc"></div>
+                      </div>
+                     
+                    </div>
+                    <br>
+                    <div class="blockchain-container-data">
+                    <div class="block-chain-50 display-inline-flex">
+                        <div class="block-chain-25">odometer reading</div>
+                        <div class="block-chain-75" id="search_co"></div>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="blockchain-container-data">
+                      <div class="block-chain-50 display-inline-flex">
+                          <div class="block-chain-25">engine hour reading</div>
+                          <div class="block-chain-75" id="search_ceh"></div>
+                        </div>
+                      </div>
+                      <br>
+                    <div class="blockchain-container-data">
+                      <div class="block-chain-50 display-inline-flex">
+                        <div class="block-chain-25">last service</div>
+                        <div class="block-chain-75" id="search_ls"></div>
+                      </div>
+                      
+                    </div>
+                    <br>
+                    <div class="blockchain-container-data">
+                    <div class="block-chain-50 display-inline-flex">
+                        <div class="block-chain-25">service type</div>
+                        <div class="block-chain-75" id="search_st"></div>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="blockchain-container-data">
+                      <div class="block-chain-50 display-inline-flex">
+                          <div class="block-chain-25">parts replaced</div>
+                          <div class="block-chain-75" id="search_pr"></div>
+                        </div>
+                      </div>
+                      <br>
+                      <div class="blockchain-container-data">
+                        <div class="block-chain-50 display-inline-flex">
+                            <div class="block-chain-25">cost</div>
+                            <div class="block-chain-75" id="search_cost"></div>
+                          </div>
+                        </div>
+                        <br>
+                        <div class="blockchain-container-data">
+                          <div class="block-chain-50 display-inline-flex">
+                              <div class="block-chain-25">is under insurance?</div>
+                              <div class="block-chain-75" id="search_ui"></div>
+                            </div>
+                          </div>
+                          <br>
+                          <div class="blockchain-container-data">
+                            <div class="block-chain-50 display-inline-flex">
+                                <div class="block-chain-25">message</div>
+                                <div class="block-chain-75" id="search_mes"></div>
+                              </div>
+                            </div>
+                            <br>
+                    
+                 
+                </div>
+                
+                
+		<div id="viewPerArray"  style="display: none;" >
+			<div class="tabledata" id="tableshow" >
+				<table id="myTable">
+          <thead>
+
+            <th class="head">VIN</th>
+            <th class="head">Account</th>
+            <th class="head">Brand</th>
+            <th class="head">Model</th>
+            <th class="head">Purchase Date</th>
+            <th class="head">Owner name</th>
+            <th class="head">isFirstHand?</th>
+          </thead>
+          <tbody>
+
+          </tbody>
+				</table>
+			</div>
+		</div>
+                
+    <div id="viewUsersArray"  style="display: none;" >
+			<div class="tabledata" id="tableshow1" >
+				<table id="myTableUser">
+          <thead>
+
+            <th class="head">Account</th>
+            <th class="head">Name</th>
+            <th class="head">Gender</th>
+            <th class="head">Address</th>
+            <th class="head">Phone</th>
+            
+          </thead>
+          <tbody>
+
+          </tbody>
+				</table>
+			</div>
+		</div>
+
+   
+    <div id="viewMechanicsArray"  style="display: none;" >
+			<div class="tabledata" id="tableshow1" >
+				<table id="myTableMechanic">
+          <thead>
+
+            <th class="head">Account</th>
+            <th class="head">Name</th>
+            <th class="head">Gender</th>
+            <th class="head">Address</th>
+            <th class="head">Phone</th>
+            <th class="head">Garage</th>
+            
+          </thead>
+          <tbody>
+
+          </tbody>
+				</table>
+			</div>
+		</div>
+
+    
+    <div id="viewAllRepoArray"  style="display: none;" >
+			<div class="tabledata" id="tableshow3" >
+				<table id="myTableReport">
+          <thead>
+
+            <th class="head">SL no.</th>
+            <!-- <th class="head">ODOMETER</th> -->
+            <th class="head">CONDITION</th>
+            <th class="head">CO</th>
+            <th class="head">EH</th>
+            <th class="head">LS</th>
+            <th class="head">ST</th>
+            <th class="head">PR</th>
+            <th class="head">COST</th>
+            <th class="head">INSURANCE</th>
+            <!-- <th class="head">Garage</th> -->
+            
+          </thead>
+          <tbody>
+
+          </tbody>
+				</table>
+			</div>
+		</div>
+
+    <div id="viewAllOwner"  style="display: none;" >
+			<div class="tabledata" id="tableshow4" >
+				<table id="myTableOwner">
+          <thead>
+
+            <th class="head">VIN</th>
+            <!-- <th class="head">ODOMETER</th> -->
+            <th class="head">Owners address</th>
+            
+            
+          </thead>
+          <tbody>
+
+          </tbody>
+				</table>
+			</div>
+		</div>
+
+                
+      </section>
+  
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
+	<script type="text/javascript" src="../app.js"></script>
+    <script type="text/javascript">
+   var storage;
+    $(document).ready(async function(){
+      //jquery for toggle sub menus
+     storage = await init();
+    
+      $('.sub-btn').click(function(){
+        $(this).next('.sub-menu').slideToggle();
+        $(this).find('.dropdown').toggleClass('rotate');
+      });
+
+      //jquery for expand and collapse the sidebar
+      $('.menu-btn').click(function(){
+        $('.side-bar').addClass('active');
+        $('.menu-btn').css("visibility", "hidden");
+      });
+
+      $('.close-btn').click(function(){
+        $('.side-bar').removeClass('active');
+        $('.menu-btn').css("visibility", "visible");
+      });
+    });
+    function view_user() {
+     
+      var searchUser = document.getElementById("searchUser");
+       searchUser.style.display = "block";
+      console.log("search user");
+      var searchMech = document.getElementById("searchMech");
+       searchMech.style.display = "none";
+       var searchCar = document.getElementById("searchCar");
+       searchCar.style.display = "none";
+       var searchReport = document.getElementById("searchReport");
+      searchReport.style.display = "none"
+       var data1 = document.getElementById('search_container');
+       data1.style.display = "none"
+
+       var data2 = document.getElementById('search_container3');
+       data2.style.display = "none"
+       var data3 = document.getElementById('search_container4');
+       data3.style.display = "none"
+       var a = document.getElementById('page-banner1');
+       a.style.display = "none"
+       var b = document.getElementById('search_container2');
+       b.style.display = "none"
+       document.getElementById('myTable').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableUser').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableMechanic').getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabUser = document.getElementById("viewUsersArray");
+	  tabUser.style.display = "none";
+    
+    var tabMech = document.getElementById("viewMechanicsArray");
+	  tabMech.style.display = "none";
+    var tabAllRepo = document.getElementById("viewAllRepoArray");
+	  tabAllRepo.style.display = "none";
+    document.getElementById('myTableReport').getElementsByTagName('tbody')[0].innerHTML = '';
+    var tabPrevOwner =  document.getElementById("viewAllOwner");
+	  tabPrevOwner.style.display = "none";
+    document.getElementById('myTableOwner').getElementsByTagName('tbody')[0].innerHTML = '';
+   
+    }
+
+    
+    function view_mech() {
+    //    var search = document.getElementById("search");
+      //search.style.display = "none";
+      var searchUser = document.getElementById("searchUser");
+       searchUser.style.display = "none";
+       var searchMech = document.getElementById("searchMech");
+       searchMech.style.display = "block";
+       var searchCar = document.getElementById("searchCar");
+       searchCar.style.display = "none"
+       var searchReport = document.getElementById("searchReport");
+      searchReport.style.display = "none"
+      console.log("search mechanic");
+      var data1 = document.getElementById('search_container');
+       data1.style.display = "none"
+       var data2 = document.getElementById('search_container');
+       data2.style.display = "none"
+       var data3 = document.getElementById('search_container4');
+       data3.style.display = "none" 
+       var a = document.getElementById('page-banner1');
+       a.style.display = "none"
+       var b = document.getElementById('search_container2');
+       b.style.display = "none"
+       var tab = document.getElementById('viewPerArray');
+       tab.style.display = "none"
+       document.getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabUser = document.getElementById("viewUsersArray");
+	  tabUser.style.display = "none";
+
+    document.getElementById('myTable').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableUser').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableMechanic').getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabMech = document.getElementById("viewMechanicsArray");
+	  tabMech.style.display = "none";
+    var tabAllRepo = document.getElementById("viewAllRepoArray");
+	  tabAllRepo.style.display = "none";
+    document.getElementById('myTableReport').getElementsByTagName('tbody')[0].innerHTML = '';
+    var tabPrevOwner =  document.getElementById("viewAllOwner");
+	  tabPrevOwner.style.display = "none";
+    document.getElementById('myTableOwner').getElementsByTagName('tbody')[0].innerHTML = '';
+       
+    }
+
+    function view_car() {
+    //    var search = document.getElementById("search");
+      //search.style.display = "none";
+      var searchUser = document.getElementById("searchUser");
+       searchUser.style.display = "none";
+       var searchMech = document.getElementById("searchMech");
+       searchMech.style.display = "none";
+       var searchReport = document.getElementById("searchReport");
+      searchReport.style.display = "none"
+      console.log("search vehicle");
+      var searchCar = document.getElementById("searchCar");
+       searchCar.style.display = "block";
+       var data1 = document.getElementById('search_container');
+       data1.style.display = "none"
+       var data2 = document.getElementById('search_container3');
+       data2.style.display = "none"
+       var data3 = document.getElementById('search_container4');
+       data3.style.display = "none"
+       var a = document.getElementById('page-banner1');
+       a.style.display = "none"
+       var b = document.getElementById('search_container2');
+       b.style.display = "none"
+       var tab = document.getElementById('viewPerArray');
+       tab.style.display = "none"
+       document.getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabUser = document.getElementById("viewUsersArray");
+	  tabUser.style.display = "none";
+    document.getElementById('myTable').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableUser').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableMechanic').getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabMech = document.getElementById("viewMechanicsArray");
+	  tabMech.style.display = "none";
+    var tabAllRepo = document.getElementById("viewAllRepoArray");
+	  tabAllRepo.style.display = "none";
+    document.getElementById('myTableReport').getElementsByTagName('tbody')[0].innerHTML = '';
+    var tabPrevOwner =  document.getElementById("viewAllOwner");
+	  tabPrevOwner.style.display = "none";
+    document.getElementById('myTableOwner').getElementsByTagName('tbody')[0].innerHTML = '';
+       
+    }
+
+    function view_report() {
+      var searchReport = document.getElementById("searchReport");
+      searchReport.style.display = "block"
+     
+     var searchUser = document.getElementById("searchUser");
+      searchUser.style.display = "none";
+     console.log("search maintainance report");
+     var searchMech = document.getElementById("searchMech");
+      searchMech.style.display = "none";
+      var searchCar = document.getElementById("searchCar");
+      searchCar.style.display = "none";
+      var data1 = document.getElementById('search_container');
+      data1.style.display = "none"
+
+      var data2 = document.getElementById('search_container3');
+      data2.style.display = "none"
+      var data3 = document.getElementById('search_container4');
+       data3.style.display = "none"
+       var a = document.getElementById('page-banner1');
+       a.style.display = "none"
+       var b = document.getElementById('search_container2');
+       b.style.display = "none"
+       var tab = document.getElementById('viewPerArray');
+       tab.style.display = "none"
+       document.getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabUser = document.getElementById("viewUsersArray");
+	  tabUser.style.display = "none";
+    document.getElementById('myTable').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableUser').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableMechanic').getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabMech = document.getElementById("viewMechanicsArray");
+	  tabMech.style.display = "none";
+    var tabAllRepo = document.getElementById("viewAllRepoArray");
+	  tabAllRepo.style.display = "none";
+    document.getElementById('myTableReport').getElementsByTagName('tbody')[0].innerHTML = '';
+    var tabPrevOwner =  document.getElementById("viewAllOwner");
+	  tabPrevOwner.style.display = "none";
+    document.getElementById('myTableOwner').getElementsByTagName('tbody')[0].innerHTML = '';
+       
+     
+   }
+
+    function view_data() {
+       // var search = document.getElementById("search");
+     // search.style.display = "none";
+      var searchUser = document.getElementById("searchUser");
+       searchUser.style.display = "none";
+       var searchMech = document.getElementById("searchMech");
+       searchMech.style.display = "none";
+       var searchReport = document.getElementById("searchReport");
+      searchReport.style.display = "none"
+     
+      console.log("car");
+      var searchCar = document.getElementById("searchCar");
+       searchCar.style.display = "none";
+
+       var data1 = document.getElementById('search_container3');
+       data1.style.display = "none"
+       var data2 = document.getElementById('search_container');
+       data2.style.display = "block"
+       var data3 = document.getElementById('search_container4');
+       data3.style.display = "none"
+       var a = document.getElementById('page-banner1');
+       a.style.display = "none"
+       var b = document.getElementById('search_container2');
+       b.style.display = "none"
+       var tab = document.getElementById('viewPerArray');
+       tab.style.display = "none"
+       document.getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabUser = document.getElementById("viewUsersArray");
+	  tabUser.style.display = "none";
+    document.getElementById('myTable').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableUser').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableMechanic').getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabMech = document.getElementById("viewMechanicsArray");
+	  tabMech.style.display = "none";
+    var tabAllRepo = document.getElementById("viewAllRepoArray");
+	  tabAllRepo.style.display = "none";
+    document.getElementById('myTableReport').getElementsByTagName('tbody')[0].innerHTML = '';
+    var tabPrevOwner =  document.getElementById("viewAllOwner");
+	  tabPrevOwner.style.display = "none";
+    document.getElementById('myTableOwner').getElementsByTagName('tbody')[0].innerHTML = '';
+       
+    }
+    function view_data5() {
+       // var search = document.getElementById("search");
+     // search.style.display = "none";
+      var searchUser = document.getElementById("searchUser");
+       searchUser.style.display = "none";
+       var searchMech = document.getElementById("searchMech");
+       searchMech.style.display = "none";
+       var searchReport = document.getElementById("searchReport");
+      searchReport.style.display = "none"
+     
+      console.log("car");
+      var searchCar = document.getElementById("searchCar");
+       searchCar.style.display = "none";
+
+       var data1 = document.getElementById('search_container3');
+       data1.style.display = "none"
+       var data2 = document.getElementById('search_container');
+       data2.style.display = "none"
+       var data3 = document.getElementById('search_container4');
+       data3.style.display = "none"
+       var a = document.getElementById('page-banner1');
+       a.style.display = "none"
+       var b = document.getElementById('search_container2');
+       b.style.display = "block"
+       var tab = document.getElementById('viewPerArray');
+       tab.style.display = "none"
+       document.getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabUser = document.getElementById("viewUsersArray");
+	  tabUser.style.display = "none";
+    document.getElementById('myTable').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableUser').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableMechanic').getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabMech = document.getElementById("viewMechanicsArray");
+	  tabMech.style.display = "none";
+    var tabAllRepo = document.getElementById("viewAllRepoArray");
+	  tabAllRepo.style.display = "none";
+    document.getElementById('myTableReport').getElementsByTagName('tbody')[0].innerHTML = '';
+    var tabPrevOwner =  document.getElementById("viewAllOwner");
+	  tabPrevOwner.style.display = "none";
+    document.getElementById('myTableOwner').getElementsByTagName('tbody')[0].innerHTML = '';
+       
+    }
+
+    function view_data3() {
+       // var search = document.getElementById("search");
+     // search.style.display = "none";
+      var searchUser = document.getElementById("searchUser");
+       searchUser.style.display = "none";
+       var searchMech = document.getElementById("searchMech");
+       searchMech.style.display = "none";
+       var searchReport = document.getElementById("searchReport");
+      searchReport.style.display = "none";
+      console.log("car");
+      var searchCar = document.getElementById("searchCar");
+       searchCar.style.display = "none";
+       var data1 = document.getElementById('search_container');
+       data1.style.display = "none"
+
+       var data2 = document.getElementById('search_container3');
+       data2.style.display = "block"
+       var data3 = document.getElementById('search_container4');
+       data3.style.display = "none"
+       var a = document.getElementById('page-banner1');
+       a.style.display = "none"
+       var b = document.getElementById('search_container2');
+       b.style.display = "none"
+       var tab = document.getElementById('viewPerArray');
+       tab.style.display = "none"
+       var tabUser = document.getElementById("viewUsersArray");
+	  tabUser.style.display = "none";
+    document.getElementById('myTable').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableUser').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableMechanic').getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabMech = document.getElementById("viewMechanicsArray");
+	  tabMech.style.display = "none";
+    var tabAllRepo = document.getElementById("viewAllRepoArray");
+	  tabAllRepo.style.display = "none";
+    document.getElementById('myTableReport').getElementsByTagName('tbody')[0].innerHTML = '';
+    var tabPrevOwner =  document.getElementById("viewAllOwner");
+	  tabPrevOwner.style.display = "none";
+    document.getElementById('myTableOwner').getElementsByTagName('tbody')[0].innerHTML = '';
+       
+       
+    }
+
+    function view_data4() {
+       // var search = document.getElementById("search");
+     // search.style.display = "none";
+      var searchUser = document.getElementById("searchUser");
+       searchUser.style.display = "none";
+       var searchMech = document.getElementById("searchMech");
+       searchMech.style.display = "none";
+       var searchReport = document.getElementById("searchReport");
+      searchReport.style.display = "none";
+      console.log("car");
+      var searchCar = document.getElementById("searchCar");
+       searchCar.style.display = "none";
+       var data1 = document.getElementById('search_container');
+       data1.style.display = "none"
+
+       var data2 = document.getElementById('search_container3');
+       data2.style.display = "none"
+
+       var data3 = document.getElementById('search_container4');
+       data3.style.display = "block"
+       var a = document.getElementById('page-banner1');
+       a.style.display = "none"
+       var b = document.getElementById('search_container2');
+       b.style.display = "none"
+       var tab = document.getElementById('viewPerArray');
+       tab.style.display = "none"
+       var tabUser = document.getElementById("viewUsersArray");
+	  tabUser.style.display = "none";
+    document.getElementById('myTable').getElementsByTagName('tbody')[0].innerHTML = '';
+       document.getElementById('myTableUser').getElementsByTagName('tbody')[0].innerHTML = '';
+       var tabAllRepo = document.getElementById("viewAllRepoArray");
+	  tabAllRepo.style.display = "none";
+    document.getElementById('myTableReport').getElementsByTagName('tbody')[0].innerHTML = '';
+    var tabPrevOwner =  document.getElementById("viewAllOwner");
+	  tabPrevOwner.style.display = "none";
+    document.getElementById('myTableOwner').getElementsByTagName('tbody')[0].innerHTML = '';
+      
+       
+    }
+   
+
+    async function search_user() {
+      let storage = await init();
+
+      var form_account = document.getElementById("account_user").value;
+      var fetch_name;
+      var fetch_gender;
+      var fetch_address;
+      var fetch_phone;
+
+
+     
+        web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				
+				return contract.methods.viewUser(form_account).call({from : acc})}).
+     then((response) => {
+          
+                console.log(response);
+                document.getElementById("search_name1").innerHTML=response[0]
+                document.getElementById("search_gender1").innerHTML=response[1]
+                document.getElementById("search_address1").innerHTML=response[2]
+                document.getElementById("search_phone1").innerHTML=response[3]
+                
+
+            
+      }).catch((err) => {
+        console.log(err);
+        document.getElementById("search_name1").innerHTML=""
+                document.getElementById("search_gender1").innerHTML=""
+                document.getElementById("search_address1").innerHTML=""
+                document.getElementById("search_phone1").innerHTML=""
+              //  alert("could not find user.....are you a user?")
+                
+      })
+
+    }
+
+     async function search_mech() {
+      let storage = await init();
+
+      var form_account = document.getElementById("account_mech").value;
+      var fetch_name;
+      var fetch_gender;
+      var fetch_address;
+      var fetch_phone;
+
+
+     
+
+        web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				
+				return storage.methods.viewMechanic(form_account).call({from : acc})}).
+        then((response) => {
+            
+                console.log(response);
+                document.getElementById("search_name").innerHTML=response[0]
+                document.getElementById("search_gender").innerHTML=response[1]
+                document.getElementById("search_address").innerHTML=response[2]
+                document.getElementById("search_phone").innerHTML=response[3]
+                document.getElementById("search_garage").innerHTML=response[4]
+                // return resolve(self.user_data);
+
+            }).catch((err) => {
+        console.log(err);
+      //  alert("could not find user.....are you a user?")
+
+        document.getElementById("search_name").innerHTML=""
+                document.getElementById("search_gender").innerHTML=""
+                document.getElementById("search_address").innerHTML=""
+                document.getElementById("search_phone").innerHTML=""
+                document.getElementById("search_garage").innerHTML=""
+                
+    })
+  }
+
+
+    async function search_car() {
+      let storage = await init();
+
+      var form_vin = document.getElementById("vin").value;
+      var fetch_oac;
+      var fetch_bn;
+      var fetch_mn;
+      var fetch_pd;
+      var fetch_on;
+      var fetch_fho;
+
+
+      web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				
+				return storage.methods.viewCar(form_vin).call({from:acc})}).
+     then((response) => {
+        console.log(response);
+                document.getElementById("search_oac").innerHTML=response[0]
+                document.getElementById("search_bn").innerHTML=response[1]
+                document.getElementById("search_mn").innerHTML=response[2]
+                document.getElementById("search_pd").innerHTML=response[3]
+                document.getElementById("search_on").innerHTML=response[4]
+                document.getElementById("search_fho").innerHTML=response[5]
+            }).catch((err) => {
+        console.log(err);
+       // alert("could not find vehicle.....are you a user?")
+
+                   document.getElementById("search_oac").innerHTML=""
+                document.getElementById("search_bn").innerHTML=""
+                document.getElementById("search_mn").innerHTML=""
+                document.getElementById("search_pd").innerHTML=""
+                document.getElementById("search_on").innerHTML=""
+                document.getElementById("search_fho").innerHTML=""
+            })
+
+            
+        
+
+    }
+
+    async function search_report() {
+      let storage = await init();
+
+      var form_vin = document.getElementById("vin_report").value;
+      var fetch_vc;
+      var fetch_co;
+      var fetch_ceh;
+      var fetch_ls;
+      var fetch_st;
+      var fetch_pr;
+      var fetch_cost;
+      var fetch_ui;
+      var fetch_mes;
+
+      web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+			
+				return contract.methods.viewMaintenaceReport(form_vin).call({from:acc})
+      }).then((response) => {
+        console.log(response);
+                document.getElementById("search_vc").innerHTML=response[0]
+                document.getElementById("search_co").innerHTML=response[1]
+                document.getElementById("search_ceh").innerHTML=response[2]
+                document.getElementById("search_ls").innerHTML=response[3]
+                document.getElementById("search_st").innerHTML=response[4]
+                document.getElementById("search_pr").innerHTML=response[5]
+                document.getElementById("search_cost").innerHTML=response[6]
+                document.getElementById("search_ui").innerHTML=response[7]
+                document.getElementById("search_mes").innerHTML=response[8]
+              //  document.getElementById("search_fho").innerHTML=response[5]
+            }).catch(function(err){
+              console.log(err)
+              document.getElementById("search_vc").innerHTML=""
+                document.getElementById("search_co").innerHTML=""
+                document.getElementById("search_ceh").innerHTML=""
+                document.getElementById("search_ls").innerHTML=""
+                document.getElementById("search_st").innerHTML=""
+                document.getElementById("search_pr").innerHTML=""
+                document.getElementById("search_cost").innerHTML=""
+                document.getElementById("search_ui").innerHTML=""
+                document.getElementById("search_mes").innerHTML=""
+            })
+        
+
+    }
+
+  
+
+    async function fetch_data() {
+      web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				
+				return storage.methods.getVin().call({from:acc})}).then((response) => {
+			var n = (response.length)
+			for (let i = 0; i < n; i++) {
+				func(response[i])
+      } })}
+    
+
+		async function func(form_vin) {
+			let storage = await init();
+      web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				
+				return storage.methods.viewCar(form_vin).call({from:acc})}).
+     then((response) => {
+        console.log(response);
+
+        var table = document.getElementById("myTable").getElementsByTagName('tbody')[0];
+	        var n = (response.length)
+			
+
+			
+
+  var row = table.insertRow(0);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  var cell3 = row.insertCell(2);
+  var cell4 = row.insertCell(3);
+  var cell5 = row.insertCell(4);
+  var cell6 = row.insertCell(5);
+  var cell7 = row.insertCell(6);
+  cell1.innerHTML = form_vin;
+  cell2.innerHTML = response[0];
+  cell3.innerHTML = response[1];
+  cell4.innerHTML = response[2];
+  cell5.innerHTML = response[3];
+  cell6.innerHTML = response[4];
+  cell7.innerHTML = response[5];
+  
+
+ 
+ console.log(response)
+
+// alert("user view permission")
+
+})
+}
+
+async function fetch_dataUser() {
+      web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				
+				return storage.methods.getUsers().call({from:acc})}).then((response) => {
+			var n = (response.length)
+			for (let i = 0; i < n; i++) {
+				funcUsers(response[i])
+      } })}
+    
+
+		async function funcUsers(form_address) {
+			let storage = await init();
+      web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+			
+				return storage.methods.viewUser(form_address).call({from:acc})}).
+     then((response) => {
+        console.log(response);
+
+        var table = document.getElementById("myTableUser").getElementsByTagName('tbody')[0];
+	        var n = (response.length)
+			
+
+			
+
+  var row = table.insertRow(0);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  var cell3 = row.insertCell(2);
+  var cell4 = row.insertCell(3);
+  var cell5 = row.insertCell(4);
+  
+  cell1.innerHTML = form_address;
+  cell2.innerHTML = response[0];
+  cell3.innerHTML = response[1];
+  cell4.innerHTML = response[2];
+  cell5.innerHTML = response[3];
+ 
+  
+
+ 
+ console.log(response)
+
+// alert("user view permission")
+
+})
+}
+
+async function fetch_dataMech() {
+      web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+			
+				return storage.methods.getMechanics().call({from:acc})}).then((response) => {
+			var n = (response.length)
+			for (let i = 0; i < n; i++) {
+				funcMech(response[i])
+      } })}
+    
+
+		async function funcMech(form_address) {
+			let storage = await init();
+      web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+			
+				return storage.methods.viewMechanic(form_address).call({from:acc})}).
+     then((response) => {
+        console.log(response);
+
+        var table = document.getElementById("myTableMechanic").getElementsByTagName('tbody')[0];
+	        var n = (response.length)
+			
+
+			
+
+  var row = table.insertRow(0);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  var cell3 = row.insertCell(2);
+  var cell4 = row.insertCell(3);
+  var cell5 = row.insertCell(4);
+  var cell6 = row.insertCell(5);
+  
+  cell1.innerHTML = form_address;
+  cell2.innerHTML = response[0];
+  cell3.innerHTML = response[1];
+  cell4.innerHTML = response[2];
+  cell5.innerHTML = response[3];
+  cell6.innerHTML = response[4];
+ 
+  
+
+ 
+ console.log(response)
+
+// alert("user view permission")
+
+})
+}
+
+async function fetch_dataAllReport() {
+ // let storage = await init();
+
+var form_vin1 = document.getElementById("vin_report").value;
+
+
+web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+  var acc = accounts[0];//array of accounts
+  
+  return contract.methods.viewMaintenaceReport(form_vin1).call({from:acc})
+}).then((response) => {
+		//	var n = response
+    console.log(response[9])
+		 for (let i = 0; i < (response[9]+1); i++) {
+			 	funcRepo(form_vin1,i);
+         console.log('doneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+       } 
+    }).catch(err=>{
+  console.log(err);
+})
+    }
+    
+
+		async function funcRepo(form_vin1,i) {
+      await new Promise(r => setTimeout(r, 1000));
+			let storage = await init();
+      web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				//deposit is method in smart contract
+				return storage.methods.viewMaintenaceReportByIndex(form_vin1,i).call({from:acc})}).
+     then((response) => {
+        console.log(response);
+
+        var table = document.getElementById("myTableReport").getElementsByTagName('tbody')[0];
+	      //  var n = (response.length)
+			
+
+			
+
+  var row = table.insertRow(0);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  var cell3 = row.insertCell(2);
+  var cell4 = row.insertCell(3);
+  var cell5 = row.insertCell(4);
+  var cell6 = row.insertCell(5);
+  var cell7 = row.insertCell(6);
+  var cell8 = row.insertCell(7);
+  var cell9 = row.insertCell(8);
+  // var cell10 = row.insertCell(9);
+  // // var cell11 = row.insertCell(10);
+
+  
+  cell1.innerHTML = i;
+  cell2.innerHTML = response[0];
+  cell3.innerHTML = response[1];
+  cell4.innerHTML = response[2];
+  cell5.innerHTML = response[3];
+  cell6.innerHTML = response[4];
+  cell7.innerHTML = response[5];
+  cell8.innerHTML = response[6];
+  cell9.innerHTML = response[7];
+  
+ 
+  
+
+ 
+  console.log("oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
+
+// alert("user view permission")
+
+}).catch(err=>{
+  console.log(err);
+})
+}
+async function displayowner() {
+			//fetch_data()
+
+			var form_vin = document.getElementById("vin").value;
+		//	var a = document.getElementById("allowed_ac").value;
+
+			web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				//deposit is method in smart contract
+				return storage.methods.viewAllOwner(form_vin).call({from:acc})
+      }).then((response) => {
+		
+	       
+    var table = document.getElementById("myTableOwner").getElementsByTagName('tbody')[0];
+			for ( i = 0;i<response.length; i++) 
+      {
+         		 var row = table.insertRow(i);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  cell1.innerHTML = form_vin;
+  cell2.innerHTML = response[i];
+  
+			}
+ 
+           console.log(response)
+		  
+          // alert("user view permission")
+		   
+     })
+		}
+    function displaydata1() {
+      search_user()
+     view_data5()
+    }
+
+    function displaydata2() {
+      search_mech()
+     view_data()
+    }
+
+    function displaydata3() {
+      search_car()
+     view_data3()
+    }
+
+    function displaydata4() {
+
+      search_report()
+     view_data4()
+    }
+
+    function displaydata5() {
+      fetch_data()
+      var b = document.getElementById("viewPerArray");
+	  b.style.display = "block";
+	  var revokePer = document.getElementById("searchCar");
+	  revokePer.style.display = "none";
+	 
+    }
+
+    function displaydataUser(){
+      fetch_dataUser()
+      var b = document.getElementById("viewUsersArray");
+	  b.style.display = "block";
+	  var revokePer = document.getElementById("searchUser");
+	  revokePer.style.display = "none";
+    }
+
+    function displaydataMech(){
+      fetch_dataMech()
+      var b = document.getElementById("viewMechanicsArray");
+	  b.style.display = "block";
+	  var revokePer = document.getElementById("searchMech");
+	  revokePer.style.display = "none"; 
+    }
+
+    function displaydataAllReport(){
+      fetch_dataAllReport()
+      var b = document.getElementById("viewAllRepoArray");
+	  b.style.display = "block";
+	  var revokePer = document.getElementById("searchReport");
+	  revokePer.style.display = "none"; 
+    }
+
+    function displaydataAllOwner(){
+      displayowner()
+      var b = document.getElementById("viewAllOwner");
+	  b.style.display = "block";
+	  var revokePer = document.getElementById("searchCar");
+	  revokePer.style.display = "none"; 
+  //  ="viewAllOwner"  style="display: none;" >
+  //<div class="tabledata" id="tableshow4" >
+    //<table id="myTableOwner">
+    }
+  </script>
+ 
+
+</body>
+
+</html>

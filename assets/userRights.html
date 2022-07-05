@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Vehicular Data Management & Trading</title>
+	<link rel="stylesheet" href="./css/datasheetstyle.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+	<link rel="stylesheet" href="../css/datasheet.css">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script type="text/javascript" src="../app.js"></script>
+</head>
+
+<body>
+
+	<div class="menu-btn">
+		<i class="fas fa-bars"></i>
+	</div>
+	<div class="side-bar">
+		<div class="close-btn">
+			<i class="fas fa-times"></i>
+		</div>
+		<div class="menu">
+			<div class="item"><a href="dashboard.html"><i class="fas fa-desktop"></i>Dashboard</a></div>
+			<div class="item">
+				<a class="sub-btn" href="register.html"><i class="fas fa-table"></i>Register<i
+						class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="#" class="sub-item">Users</a>
+					<a href="#" class="sub-item">Assets</a>
+
+				</div>
+			</div>
+			<div class="item"><a href="search.html"><i class="fas fa-th"></i>Search</a></div>
+			<div class="item"><a href="Mutation.html"><i class="fa fa-clipboard"></i>Transfer ownership</a></div>
+			
+			<div class="item">
+				<a class="sub-btn"><i class="fas fa-table"></i>user right<i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+				  <a href="#" class="sub-item" onclick="view_per()"> view</a>
+				  <a href="#" class="sub-item" onclick="grant_per()">grant</a>
+				  <a href="#" class="sub-item" onclick="revoke_per()">revoke</a>
+				 
+				  
+				</div>
+			   </div> <!--a href="search.html"><i class="fas fa-th"></i>Search</a></div>-->
+			<div class="item"><a href="Maintenace.html"><i class="fa fa-database"></i>Maintenance</a></div>
+			<div class="item">
+				<a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
+				<div class="sub-menu">
+					<a href="developers.html" class="sub-item">Know our Developers</a>
+					<a href="about.html" class="sub-item">About the Project</a>
+				</div>
+			</div>
+			<!-- ------------------------------------------------main class yahan describe kiya gaya hai -------------------------------------------->
+		</div>
+	</div>
+
+	<div id="page-banner2">
+		<center>        
+		  
+		  <div class="ban">
+			<center>
+			<h2 class="glow-menu"> Welcome To User Rights Portal</h2>
+			<h3 style="font-size:large;" >Select The Option To View/Grant/revoke permission to report</h3>
+		  </center>
+		  </div>
+		</center>
+	
+	  </div>
+	<section class="main">
+		<div id="viewPer" style="display: none;">
+			<section class="cm-logins">
+				<form class="cm-login-form" onsubmit="return false">
+					<fieldset>
+						<center>
+							<legend>Users allowed to view maintainance report</legend>
+						</center>
+						<input type="text" id="allow_vin" class="cm-text-input" placeholder="VIN">
+					
+						<button type="submit" class="cm-submit2" onclick="fun1()"> Click here to see all 
+							allowed users </button>
+					</fieldset>
+					<br>
+					<!--<div class="tabledata" id="tableshow" style="display: none;">
+						<table id="myytab">
+							<tr>
+								<th class="head">Account no</th>
+								
+							</tr>
+						</table>
+					</div>-->
+				</form>
+			</section>
+		</div>
+
+		<div id="revokePer"  style="display: none;" >
+			<section class="cm-logins">
+				<form class="cm-login-form" onsubmit="return false">
+					<fieldset>
+						<center>
+							<legend>revoke view mainatineance report permission</legend>
+						</center>
+						<input type="text" id="revoke_vin" class="cm-text-input" placeholder="VIN">
+						<input type="text" id="revoke_account" class="cm-text-input" placeholder="account to remove">
+						<!-- <input type="text" id="revoke_account1" class="cm-text-input" placeholder="user account"> -->
+						<button type="submit" class="cm-submit2" onclick="fun3()"> Click here to revoke permission </button>
+					</fieldset>
+	
+				</form>
+			</section>
+		</div>
+
+		<div id="addPer"  style="display: none;" >
+			<section class="cm-logins">
+				<form class="cm-login-form" onsubmit="return false">
+					<fieldset>
+						<center>
+							<legend>add Users to view mainatineance report</legend>
+						</center>
+						<input type="text" id="add_vin" class="cm-text-input" placeholder="VIN">
+						<input type="text" id="add_account" class="cm-text-input" placeholder="account to add">
+						
+						<button type="submit" class="cm-submit2" onclick="fun2()"> Click here to  grant permission </button>
+					</fieldset>
+					<br>
+				</form>
+			</section>
+		</div>
+
+		<div id="viewPerArray"  style="display: none;" >
+			<div class="tabledata" id="tableshow" >
+				<table id="myTable">
+				</table>
+			</div>
+		</div>
+	</section>
+
+
+
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script type="text/javascript" src="../app.js"></script>
+    <script type="text/javascript">
+  var storage;
+   $(document).ready( async function () {
+			//jquery for toggle sub menus
+			
+			storage = await init();
+    
+			$('.sub-btn').click(function () {
+				$(this).next('.sub-menu').slideToggle();
+				$(this).find('.dropdown').toggleClass('rotate');
+			});
+
+			//jquery for expand and collapse the sidebar
+			$('.menu-btn').click(function () {
+				$('.side-bar').addClass('active');
+				$('.menu-btn').css("visibility", "hidden");
+			});
+
+			$('.close-btn').click(function () {
+				$('.side-bar').removeClass('active');
+				$('.menu-btn').css("visibility", "visible");
+			});
+		});
+
+   function view_per() {
+     
+	 var viewPer = document.getElementById("viewPer");
+	  viewPer.style.display = "block";
+	 console.log("view Permission");
+	 var grantPer = document.getElementById("addPer");
+	  grantPer.style.display = "none";
+	  var revokePer = document.getElementById("revokePer");
+	  revokePer.style.display = "none";
+	  var a = document.getElementById("page-banner2");
+	  a.style.display = "none";
+	  var table = document.getElementById("viewPerArray");
+	  table.style.display = "none";
+	  document.getElementById('myTable').innerHTML = '';
+	 
+	  
+	 
+   }
+
+   function grant_per() {
+     
+	var viewPer = document.getElementById("viewPer");
+	  viewPer.style.display = "none";
+	 console.log("revoke permission");
+	 var grantPer = document.getElementById("addPer");
+	  grantPer.style.display = "block";
+	  var revokePer = document.getElementById("revokePer");
+	  revokePer.style.display = "none";
+	  var a = document.getElementById("page-banner2");
+	  a.style.display = "none";
+	  var table = document.getElementById("viewPerArray");
+	  table.style.display = "none";
+	  document.getElementById('myTable').innerHTML = '';
+	 
+   }
+   function revoke_per() {
+     
+	var viewPer = document.getElementById("viewPer");
+	  viewPer.style.display = "none";
+	 console.log("grant permission");
+	 var grantPer = document.getElementById("addPer");
+	  grantPer.style.display = "none";
+	  var revokePer = document.getElementById("revokePer");
+	  revokePer.style.display = "block";
+	  var a = document.getElementById("page-banner2");
+	  a.style.display = "none";
+	  var table = document.getElementById("viewPerArray");
+	  table.style.display = "none";
+	  document.getElementById('myTable').innerHTML = '';
+   }
+
+	
+		function addallowed() {
+			//fetch_data()
+			var form_vin = document.getElementById("add_vin").value;
+			var form_ac = document.getElementById("add_account").value;
+		
+		//	x.style.display = "block";
+		web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				//deposit is method in smart contract
+				return contract.methods.GrantViewPermission(form_vin,form_ac).send({from: acc,
+        	gas: 4700000,
+	 	gasPrice: '2000000000'})
+
+			}).then((response) => {
+           console.log(response)
+           alert("user added successfully for view permission")
+     }).catch(function(err)
+			{
+			//	console.log("error:can't add vehicle");
+        console.log(err);
+        alert("error : Access denied");
+			})
+		}
+
+		function removeallowed() {
+			//fetch_data()
+			var form_vin = document.getElementById("revoke_vin").value;
+			var form_ac1 = document.getElementById("revoke_account").value;
+		//	var form_ac = document.getElementById("revoke_account1").value;
+		//	x.style.display = "block";
+		web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				//deposit is method in smart contract
+				return contract.methods.RevokeViewPermission(form_vin,form_ac1).send({from: acc,
+        	gas: 4700000,
+	 	gasPrice: '2000000000'})
+
+			}).
+		then((response) => {
+           console.log(response)
+           alert("user removed successfully from view permission")
+     }).catch(function(err)
+			{
+			//	console.log("error:can't add vehicle");
+        console.log(err);
+        alert("error : Access denied");
+			})
+		}
+
+		
+	
+		
+	async function displayallowed() {
+			//fetch_data()
+
+			var form_vin = document.getElementById("allow_vin").value;
+		//	var a = document.getElementById("allowed_ac").value;
+
+			web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				//deposit is method in smart contract
+				return storage.methods.viewAllowed(form_vin).call({from:acc})
+      }).then((response) => {
+		var table = document.getElementById("myTable");
+	        var n = (response.length)
+			var row  = table.insertRow(0);
+			var cell = row.insertCell(0);
+			cell.innerHTML = "Accounts"
+			cell.style = "background-color: powderblue;"
+
+			for (let i = 0,j= -1; i < n; i++,j++) {
+
+  var row = table.insertRow(i+1);
+  var cell1 = row.insertCell(0);
+  cell1.innerHTML = response[i];
+  
+			}
+ 
+           console.log(response)
+		  
+          // alert("user view permission")
+		   
+     }).catch(function(err)
+			{
+			//	console.log("error:can't add vehicle");
+        console.log(err);
+        alert("error : Access denied");
+			})
+		}
+
+		function fun1(){
+		displayallowed();
+		var b = document.getElementById("viewPerArray");
+	  b.style.display = "block";
+	  var revokePer = document.getElementById("viewPer");
+	  revokePer.style.display = "none";
+	 
+
+		}
+		function fun2(){
+		addallowed();
+
+		}
+		function fun3(){
+		removeallowed();	
+		}
+		
+
+	</script>
+
+</body>
+
+</html>

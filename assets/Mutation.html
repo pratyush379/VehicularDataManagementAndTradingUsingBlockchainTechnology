@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicular Data Management & Trading</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="../css/mutation.css">
+    <link rel="stylesheet" href="../css/demo.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+	<script type="text/javascript" src="../app.js"></script>
+  </head>
+  <body>
+
+    <div class="menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="side-bar">
+      <div class="close-btn">
+        <i class="fas fa-times"></i>
+      </div>
+      <div class="menu">
+        <div class="item"><a href="dashboard.html"><i class="fas fa-desktop"></i>Dashboard</a></div>
+        <div class="item">
+          <a class="sub-btn" href="register.html"><i class="fas fa-table"></i>Register<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <a href="#" class="sub-item">Users</a>
+            <a href="#" class="sub-item">Assets</a>
+          </div>
+        </div>
+        <div class="item">
+          <a class="sub-btn" href="search.html"><i class="fas fa-table"></i>Search<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <a href="#" class="sub-item">Users</a>
+            <a href="#" class="sub-item">Mechanic</a>
+            <a href="#" class="sub-item">vehicle</a>
+            <a href="#" class="sub-item">report</a>
+            
+          </div>
+          </div>
+
+		<div class="item"><a href="Mutation.html"><i class="fa fa-clipboard"></i>Transfer ownership</a></div>
+    <div class="item">
+      <a class="sub-btn" href="userRights.html"><i class="fas fa-table"></i>user right<i
+        class="fas fa-angle-right dropdown"></i></a>
+      <div class="sub-menu">
+        <a href="#" class="sub-item">view permission</a>
+        <a href="#" class="sub-item">grant permission</a>
+        <a href="#" class="sub-item">revoke permission</a>
+  
+      </div>
+      </div>
+    <div class="item"><a href="Maintenace.html"><i class="fa fa-database"></i>Maintenance</a></div>
+        <div class="item">
+          <a class="sub-btn"><i class="fas fa-cogs"></i>Settings<i class="fas fa-angle-right dropdown"></i></a>
+          <div class="sub-menu">
+            <a href="developers.html" class="sub-item">Know our Developers</a>
+            <a href="about.html" class="sub-item">About the Project</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <!-- ---------------------------------------------------------------------------------------------- -->
+    <center><p id="demo" style="padding-top: 20px; font-size:xx-large; font-weight: 600;"> Transfer of Ownership </p></center>
+    <section class="main">
+      <div id="search">
+        
+          <form class="cm-login-form" onsubmit="return false" >
+            <fieldset>
+             <center><legend>Seller </legend></center>
+             <input type="text" id="user_account" class="cm-text-input" placeholder="Enter Account Number">
+             <input type="text" id="vin" class="cm-text-input" placeholder="Enter Account vin">
+             <input type="password" id="vendor_password" class="cm-text-input" placeholder="Enter Password">
+             
+             
+            </fieldset>
+            <button type="submit" class="cm-submit2" onclick="displaycar()"> Fetch Details </button>
+             <div class="search" id="search_container_vendor" style="display: none;">
+              <div  style="font-weight: bold; padding-top: 20px; padding-bottom: 5px; color: darkgreen;">Owner Detail</div> <span></span>
+               <div class="blockchain-container-data ">
+                  <div class="block-chain-50 display-inline-block ">
+                    <div class="block-chain-25 ">Owner Name</div>
+                    <div class="block-chain-25 ">Phone no</div>
+                    <div class="block-chain-25 ">Account</div>
+                    <div class="block-chain-25 ">date of buy</div>
+                    <div class="block-chain-25 ">brand</div>
+                    <div class="block-chain-25 ">model area</div>
+                    <div class="block-chain-25 ">first hand</div>
+
+                    
+                  </div>
+                  <div class="block-chain-50 display-inline-block ">
+                    <div class="block-chain-75 " id="owner_name"></div>
+                    <div class="block-chain-75" id="owner_phone"></div>
+                    <div class="block-chain-75 " id="owner_account"></div>
+                    <div class="block-chain-75 " id="owner_pd"></div>
+                    <div class="block-chain-75 " id="owner_bn"></div>
+                    <div class="block-chain-75" id="owner_mn"></div>
+                    <div class="block-chain-75 " id="owner_fho"></div>
+                    
+                    
+                  </div>
+                  
+                  
+               </div>
+             </div>
+
+             </div>
+
+             
+          </form>
+          
+          <form class="cm-login-form" onsubmit="return false" >
+            <fieldset>
+             <center><legend>Buyer</legend></center>
+             <input type="text" id="buyer_account_no" class="cm-text-input" placeholder="Enter buyer account">
+             <input type="password" id="buyer_password" class="cm-text-input" placeholder="Enter Password"> 
+             
+             <button type="submit" class="cm-submit2" onclick="displaybuyer()"> Fetch Details</button>
+            </fieldset>
+             <div class="search" id="search_container_buyer" style="display: none;">
+              <div  style="font-weight: bold; padding-top: 20px; padding-bottom: 5px; color: darkgreen;">Buyer Detail</div> <span></span>
+               <div class="blockchain-container-data ">
+                  <div class="block-chain-50 display-inline-block ">
+                    <div class="block-chain-25 ">Name</div>
+                    <div class="block-chain-25 ">Gender</div>
+                    <div class="block-chain-25 ">Address</div>
+                    <div class="block-chain-25 ">Phone</div>
+                   
+                    
+
+                    
+                  </div>
+                  <div class="block-chain-50 display-inline-block ">
+                    <div class="block-chain-75 " id="buyer_name"></div>
+                    <div class="block-chain-75" id="buyer_gender"></div>
+                    <div class="block-chain-75 " id="buyer_address"></div>
+                    <div class="block-chain-75 " id="buyer_phone"></div>
+
+                    
+                    
+                  </div>
+                  
+                  
+               </div>
+             </div>
+
+             </div>
+
+          </form>
+       </section>
+
+      </div>
+   
+
+    <button style="background-color: rgb(252, 104, 12); color: white; margin-top:0px; margin-left:800px;z-index: 9999; position: absolute;top: 68%; width: 200px; height: 60px; border-radius: 25px; font-size: larger;font-weight: 700;" onclick="transfer()">Transfer</button>
+	<!-- <button style="background-color: green; color: white; margin-top:0px; margin-left:500px; z-index: 9999; position: absolute;top: 68%; width: 200px; height: 60px; border-radius: 25px;font-size: larger;font-weight: 700;" onclick="validate()">Validate</button> -->
+
+
+
+    <script type="text/javascript">
+	var storage;
+    $(document).ready(async function(){
+		storage = await init()
+      //jquery for toggle sub menus
+      $('.sub-btn').click(function(){
+        $(this).next('.sub-menu').slideToggle();
+        $(this).find('.dropdown').toggleClass('rotate');
+      });
+
+      //jquery for expand and collapse the sidebar
+      $('.menu-btn').click(function(){
+        $('.side-bar').addClass('active');
+        $('.menu-btn').css("visibility", "hidden");
+      });
+
+      $('.close-btn').click(function(){
+        $('.side-bar').removeClass('active');
+        $('.menu-btn').css("visibility", "visible");
+      });
+    });
+
+
+        function seller(){
+          var form_account=document.getElementById("user_account").value;  
+          var form_account1=document.getElementById("vin").value; 
+          web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				//deposit is method in smart contract
+				return contract.methods.viewUser(form_account).call({from : acc})}).         
+          then((response) => {
+                console.log(response);
+                document.getElementById("owner_name").innerHTML=response[0]
+                document.getElementById("owner_phone").innerHTML=response[3]
+
+            })
+            web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				//deposit is method in smart contract
+				return storage.methods.viewCar(form_account1).call({from:form_account})}).
+           then((response) => {
+                console.log(response);
+                document.getElementById("owner_account").innerHTML=response[0]//account
+                document.getElementById("owner_pd").innerHTML=response[3]//purchase date
+                document.getElementById("owner_bn").innerHTML=response[1]//brand name
+                document.getElementById("owner_mn").innerHTML=response[2]//model name
+                document.getElementById("owner_fho").innerHTML=(response[5])//isfirts
+            })
+        }
+
+        function buyer(){
+          var form_account=document.getElementById("buyer_account_no").value;
+          
+          web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				//deposit is method in smart contract
+				return contract.methods.viewUser(form_account).call({from : acc})}).then((response) => {
+                console.log(response);
+                document.getElementById("buyer_name").innerHTML=response[0]
+                document.getElementById("buyer_gender").innerHTML=response[1]
+                document.getElementById("buyer_address").innerHTML=response[2]
+                document.getElementById("buyer_phone").innerHTML=response[3]
+
+            })
+        }
+
+        function init_transfer(a){
+          var form_seller_account=document.getElementById("user_account").value;
+    var form_buyer_account=document.getElementById("buyer_account_no").value;
+    var form_seller_vin=document.getElementById("vin").value;
+    var new_owner_name = a
+    console.log(new_owner_name)
+   
+          // var form_buyer_account=document.getElementById("buyer_account_no").value;
+          
+         
+    // storage.methods.getPassword(form_buyer_account).call().then((response) => {
+      
+    //   document.getElementById("buyer_name").innerHTML=response[0]
+    //   console.log(response[0])
+    // })
+  //  var new_owner_name=document.getElementById("buyer_name").innerHTML;
+  web3.eth.requestAccounts().then(function(accounts){//getaccounts is not working hence using requestAccounts 
+				var acc = accounts[0];//array of accounts
+				//deposit is method in smart contract
+				return contract.methods.transferOwnership(form_seller_vin,form_buyer_account,new_owner_name).send({from: acc,
+        	gas: 4700000,
+	 	gasPrice: '2000000000'});//send from which acc
+
+  })	  .then((response) => {
+           console.log(response)
+           console.log("Ownership Tranfer Successfull")
+           alert("Ownership Tranfer Successfull")
+     }).catch(function(err)
+			{
+				console.log("error:Ownership Transfer unsuccessfull");
+        console.log(err);
+        alert("error:Ownership Transfer unsuccessfull");
+			})
+    }
+   
+
+function init_money_transfer(){
+  var form_seller_account=document.getElementById("vendor_account_no").value;
+	var form_buyer_account=document.getElementById("buyer_account_no").value;
+  var buyer_password=document.getElementById("buyer_password").value;
+	console.log(form_seller_account)
+	console.log(storage.methods)
+  
+	let valu=document.getElementById("owner_plotprice").innerHTML;
+  valu=valu/150000
+	storage.methods.remove_user(form_seller_account).send({
+		from:form_buyer_account,
+	 	gas: 4700000,
+
+		value: Web3.utils.toWei(valu.toString(), 'ether'),
+	 	gasPrice: '2000000000'
+		}).then((response) => {
+      alert("Money Transferred Sucessfully")
+           console.log(response)
+     })
+          	document.getElementById("owner_district").innerHTML="Not Found"
+          	document.getElementById("owner_location").innerHTML="Not Found"
+          	document.getElementById("owner_plotno").innerHTML="Not Found"
+          	document.getElementById("owner_plotarea").innerHTML="Not Found"
+          	document.getElementById("owner_plotprice").innerHTML="Not Found"
+    } 
+
+    function displaycar() {
+    seller()
+    var x = document.getElementById("search_container_vendor");
+    x.style.display = "block";
+   }
+
+   function displaybuyer() {
+    buyer()
+    var x = document.getElementById("search_container_buyer");
+    x.style.display = "block";
+   }
+
+    function transfer() {
+     console.log("Transfer call ho raha hai--------------------")
+     validate()
+         }
+           
+  function validate(){
+	var form_seller_account=document.getElementById("user_account").value;
+  var buyer_account_no=document.getElementById("buyer_account_no").value;
+  var a=document.getElementById("vendor_password").value;
+  var b=document.getElementById("buyer_password").value;
+//	var form_buyer_account=document.getElementById("buyer_account_no").value;
+  //var buyer_password=document.getElementById("buyer_password").value;
+//	console.log(form_seller_account)
+//	console.log(storage.methods)
+
+    storage.methods.getPassword(form_seller_account).call().then((response) => {
+                console.log(response[0]);
+                console.log(a);
+
+               if (a==response[0]){
+                
+                  storage.methods.getPassword(buyer_account_no).call().then((response) => {
+                  // console.log(response[0]);
+                    if (b==response[0]){
+                      console.log(response[0]);
+                      console.log(b);
+var a = response[1]
+                      init_transfer(a);
+                        }
+                    else{
+                      alert("     Acesss Denied   Enter Correct Password   ");
+                     // location.reload();
+               }
+            }) 
+               }
+               else{
+                 alert("     Acesss Denied   Enter Correct Password   ");
+                // location.reload();
+               }
+            }) 
+  }
+
+ 
+  </script>
+  </body>
+</html>
