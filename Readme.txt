@@ -1,18 +1,6 @@
 Vehicular Data Management and Trading Using Blockchain Technology		    
 Project  (PROJ-CS881)
-            Under the guidance of
-			   Dr. Bikromadittya Mondal
-Submitted by
-Name:	Ritesh Raman		Name: Pratyush
-Roll No.:	11500118066		Roll No.:  11500118079
-Regn. No.:	181150110083      Regn. No.: 181150110070
-		
-Name:	Vivek Verma		     Name: Shubhang Sharma
-Roll No.:	11500118024	     Roll No.: 11500118047
-Regn. No.:	181150110125     Regn. No.: 181150110102
-
-
-
+          
 prerequisite:
 1.install visual studio code
 2.Node.js
